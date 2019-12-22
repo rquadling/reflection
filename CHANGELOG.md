@@ -1,4 +1,4 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 0.0.0 - CCYY-MM-DD - Initial release
+## 1.0.0 - 2019-12-22 - Initial release
