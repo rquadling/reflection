@@ -1,0 +1,38 @@
+{
+  "name": "rquadling/reflection",
+  "description": "A small set of enhancements to PHP's standard Reflection classes",
+  "authors": [
+    {
+      "name": "Richard Quadling",
+      "email": "RQuadling@GMail.com"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "require": {
+    "php": "^7",
+    "rquadling/polyfiller": "^1.0.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "phpstan/phpstan": "^0.9.2",
+    "phpunit/phpunit": "^6.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "RQuadling\\Reflection\\": "lib/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "RQuadlingTests\\Reflection\\": "tests/"
+    }
+  },
+  "scripts": {
+    "cs-lint": "php-cs-fixer fix --diff -vvv --dry-run",
+    "cs-fix": "php-cs-fixer fix . -vvv || true",
+    "sa": "vendor/bin/phpstan analyse --no-progress --ansi -l 7 lib tests"
+  }
+}
