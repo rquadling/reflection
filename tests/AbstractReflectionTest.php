@@ -30,22 +30,27 @@ use PHPUnit\Framework\TestCase;
 use ReflectionException;
 use RQuadling\Reflection\ReflectionClass;
 use RQuadling\Reflection\ReflectionMethod;
+use RQuadling\Reflection\ReflectionObject;
 use RQuadling\Reflection\ReflectionProperty;
 
 abstract class AbstractReflectionTest extends TestCase
 {
     /**
      * @dataProvider providerForGetConstants
+     *
+     * @param array<int, string> $expectedConstants
      */
-    public function testGetConstants(callable $filter = null, array $expectedConstants)
+    public function testGetConstants(?callable $filter, array $expectedConstants): void
     {
         $this->assertSame($expectedConstants, ($this->generateReflector())->getConstants($filter));
     }
 
     /**
      * @dataProvider providerForGetMethods
+     *
+     * @param array<int, string> $expectedMethodNames
      */
-    public function testGetMethods(int $filter = -1, array $expectedMethodNames)
+    public function testGetMethods(int $filter, array $expectedMethodNames): void
     {
         $this->assertSame(
             $expectedMethodNames,
@@ -60,8 +65,10 @@ abstract class AbstractReflectionTest extends TestCase
 
     /**
      * @dataProvider providerForGetProperties
+     *
+     * @param array<int, string> $expectedPropertyNames
      */
-    public function testGetProperties(int $filter, array $expectedPropertyNames)
+    public function testGetProperties(int $filter, array $expectedPropertyNames): void
     {
         $this->assertSame(
             $expectedPropertyNames,
@@ -86,7 +93,7 @@ abstract class AbstractReflectionTest extends TestCase
         bool $isProtected,
         bool $isPrivate,
         bool $isStatic
-    ) {
+    ): void {
         $reflectedProperty = $this->generateReflector()->getProperty($property);
 
         $this->assertInstanceOf(ReflectionProperty::class, $reflectedProperty);
@@ -101,7 +108,10 @@ abstract class AbstractReflectionTest extends TestCase
         $this->assertSame($isStatic, $reflectedProperty->isStatic(), 'Static mismatch');
     }
 
-    public function providerForGetConstants()
+    /**
+     * @return array<string, array<int, array<string, int>|(Closure(string): bool)|null>>
+     */
+    public function providerForGetConstants(): array
     {
         return
             [
@@ -115,13 +125,13 @@ abstract class AbstractReflectionTest extends TestCase
                     ],
                 ],
                 'Filtered' => [
-                    function (string $constant) {
+                    function (string $constant): bool {
                         return false;
                     },
                     [],
                 ],
                 'Starts with CONSTANT' => [
-                    function (string $constant) {
+                    function (string $constant): bool {
                         return \strpos($constant, 'CONSTANT') === 0;
                     },
                     [
@@ -130,7 +140,7 @@ abstract class AbstractReflectionTest extends TestCase
                     ],
                 ],
                 'Does not starts with CONSTANT' => [
-                    function (string $constant) {
+                    function (string $constant): bool {
                         return \strpos($constant, 'CONSTANT') !== 0;
                     },
                     [
@@ -139,7 +149,7 @@ abstract class AbstractReflectionTest extends TestCase
                     ],
                 ],
                 'Contains CONSTANT' => [
-                    function (string $constant) {
+                    function (string $constant): bool {
                         return \strpos($constant, 'CONSTANT') !== false;
                     },
                     [
@@ -152,7 +162,10 @@ abstract class AbstractReflectionTest extends TestCase
             ];
     }
 
-    public function providerForGetMethods()
+    /**
+     * @return array<string, array<int, array<int, string>|int>>
+     */
+    public function providerForGetMethods(): array
     {
         return
             [
@@ -257,7 +270,10 @@ abstract class AbstractReflectionTest extends TestCase
             ];
     }
 
-    public function providerForGetProperties()
+    /**
+     * @return array<string, array<int, array<int, string>|int>>
+     */
+    public function providerForGetProperties(): array
     {
         return
             [
@@ -394,7 +410,10 @@ abstract class AbstractReflectionTest extends TestCase
             ];
     }
 
-    public function providerForGetProperty()
+    /**
+     * @return array<string, array<int|string, string|bool>>
+     */
+    public function providerForGetProperty(): array
     {
         return
             [
@@ -600,6 +619,6 @@ abstract class AbstractReflectionTest extends TestCase
             ];
     }
 
-    /** @return ReflectionClass */
+    /** @return ReflectionClass|ReflectionObject */
     abstract protected function generateReflector();
 }

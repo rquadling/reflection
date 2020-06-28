@@ -33,11 +33,25 @@ use RQuadling\Reflection\Traits\GetMethodsTrait;
 /**
  * Extends the ReflectionClass to allow conversion of a ReflectionProperty and ReflectionMethod to a localised
  * ReflectionProperty and ReflectionMethod.
+ *
+ * @extends \ReflectionClass<ReflectionClass>
  */
 class ReflectionClass extends \ReflectionClass
 {
     use GetConstantsTrait;
     use GetMethodsTrait;
+
+    /**
+     * ReflectionClass constructor.
+     *
+     * @param class-string|object $argument
+     *
+     * @throws ReflectionException
+     */
+    public function __construct($argument)
+    {
+        parent::__construct($argument);
+    }
 
     /**
      * Override the standard ReflectionClass::getProperties method to return a custom ReflectionProperty array.
@@ -52,7 +66,7 @@ class ReflectionClass extends \ReflectionClass
      *
      * @uses \ReflectionProperty
      */
-    public function getProperties($filter = -1)
+    public function getProperties($filter = -1): array
     {
         return \array_map(
             function (\ReflectionProperty $property) {
@@ -67,11 +81,9 @@ class ReflectionClass extends \ReflectionClass
      *
      * @param string $name
      *
-     * @return ReflectionProperty
-     *
      * @throws ReflectionException
      */
-    public function getProperty($name)
+    public function getProperty($name): ReflectionProperty
     {
         $property = parent::getProperty($name);
 

@@ -28,51 +28,51 @@ namespace RQuadlingTests\Reflection\Fixtures;
 
 abstract class AbstractReflectionFixture
 {
-    public function fnPublic()
+    public function fnPublic(): void
     {
     }
 
-    protected function fnProtected()
+    protected function fnProtected(): void
     {
     }
 
-    private function fnPrivate()
+    private function fnPrivate(): void
     {
     }
 
-    public static function fnStaticPublic()
+    public static function fnStaticPublic(): void
     {
     }
 
-    protected static function fnStaticProtected()
+    protected static function fnStaticProtected(): void
     {
     }
 
-    private static function fnStaticPrivate()
+    private static function fnStaticPrivate(): void
     {
     }
 
-    final public function fnFinalPublic()
+    final public function fnFinalPublic(): void
     {
     }
 
-    final protected function fnFinalProtected()
+    final protected function fnFinalProtected(): void
     {
     }
 
-    final public static function fnFinalStaticPublic()
+    final public static function fnFinalStaticPublic(): void
     {
     }
 
-    final protected static function fnFinalStaticProtected()
+    final protected static function fnFinalStaticProtected(): void
     {
     }
 
-    abstract public function fnAbstractPublic();
+    abstract public function fnAbstractPublic(): void;
 
-    abstract protected function fnAbstractProtected();
+    abstract protected function fnAbstractProtected(): void;
 
-    abstract public static function fnAbstractStaticPublic();
+    abstract public static function fnAbstractStaticPublic(): void;
 
-    abstract protected static function fnAbstractStaticProtected();
+    abstract protected static function fnAbstractStaticProtected(): void;
 }

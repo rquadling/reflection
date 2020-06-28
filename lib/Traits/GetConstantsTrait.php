@@ -30,6 +30,8 @@ trait GetConstantsTrait
 {
     /**
      * Override the standard ReflectionClass/ReflectionObject::getConstants method to allow filtering in some user defined form.
+     *
+     * @return \ReflectionClassConstant[]
      */
     public function getConstants(callable $filter = null): array
     {
