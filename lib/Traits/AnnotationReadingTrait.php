@@ -30,6 +30,8 @@ trait AnnotationReadingTrait
 {
     public function hasAnnotation(string $annotationRegex): bool
     {
-        return 1 === \preg_match($annotationRegex, $this->getDocComment());
+        $docComment = $this->getDocComment();
+
+        return $docComment !== false && 1 === \preg_match($annotationRegex, $docComment);
     }
 }

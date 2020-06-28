@@ -31,7 +31,7 @@ use RQuadlingTests\Reflection\Fixtures\ReflectionFixture;
 
 class ReflectionClassTest extends AbstractReflectionTest
 {
-    protected function generateReflector()
+    protected function generateReflector(): ReflectionClass
     {
         return new ReflectionClass(ReflectionFixture::class);
     }

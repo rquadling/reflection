@@ -34,7 +34,11 @@ class ReflectionMethod extends \ReflectionMethod
 
     public function getReturnTypeFromDocBlock(): string
     {
-        \preg_match('`\* @return (?P<Type>\S++)`', $this->getDocComment(), $matches);
+        $docComment = $this->getDocComment();
+        $matches = [];
+        if ($docComment !== false) {
+            \preg_match('`\* @return (?P<Type>\S++)`', $docComment, $matches);
+        }
 
         return array_get($matches, 'Type', '');
     }

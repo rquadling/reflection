@@ -37,14 +37,17 @@ class ReflectionMethodTest extends TestCase
      *
      * @throws \ReflectionException
      */
-    public function testGetReturnTypeFromDocblock(string $propertyName, string $expectedType)
+    public function testGetReturnTypeFromDocblock(string $propertyName, string $expectedType): void
     {
         $reflectedProperty = new ReflectionMethod(ReflectionFixture::class, $propertyName);
 
         $this->assertSame($expectedType, $reflectedProperty->getReturnTypeFromDocBlock());
     }
 
-    public function provideDataForGetReturnTypeFromDocblock()
+    /**
+     * @return array<string, array<int, string|string>>
+     */
+    public function provideDataForGetReturnTypeFromDocblock(): array
     {
         return [
             'string' => ['aString', 'string'],

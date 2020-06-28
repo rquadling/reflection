@@ -39,7 +39,11 @@ class ReflectionProperty extends \ReflectionProperty
 
     public function getTypeFromDocBlock(): string
     {
-        \preg_match('`\* @var (?P<Type>\S++)`', $this->getDocComment(), $matches);
+        $docComment = $this->getDocComment();
+        $matches = [];
+        if ($docComment !== false) {
+            \preg_match('`\* @var (?P<Type>\S++)`', $docComment, $matches);
+        }
 
         return array_get($matches, 'Type', '');
     }

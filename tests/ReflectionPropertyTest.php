@@ -33,7 +33,7 @@ use RQuadlingTests\Reflection\Fixtures\ReflectionFixture;
 
 class ReflectionPropertyTest extends TestCase
 {
-    public function testIsInjected()
+    public function testIsInjected(): void
     {
         $reflectedInjectedProperty = new ReflectionProperty(ReflectionFixture::class, 'injected');
         $reflectedNotInjectedProperty = new ReflectionProperty(ReflectionFixture::class, 'notInjected');
@@ -46,14 +46,14 @@ class ReflectionPropertyTest extends TestCase
      * @throws ReflectionException
      * @dataProvider providerForGetTypeFromDocBlock
      */
-    public function testGetTypeFromDocBlock(string $propertyName, string $expectedType)
+    public function testGetTypeFromDocBlock(string $propertyName, string $expectedType): void
     {
         $reflectedProperty = new ReflectionProperty(ReflectionFixture::class, $propertyName);
 
         $this->assertSame($expectedType, $reflectedProperty->getTypeFromDocBlock());
     }
 
-    public function testIsDelayedInject()
+    public function testIsDelayedInject(): void
     {
         $reflectedDelayedInjectedProperty = new ReflectionProperty(ReflectionFixture::class, 'delayedInjected');
         $reflectedNotDelayedInjectedProperty = new ReflectionProperty(ReflectionFixture::class, 'notDelayedInjected');
@@ -62,7 +62,10 @@ class ReflectionPropertyTest extends TestCase
         $this->assertFalse($reflectedNotDelayedInjectedProperty->isDelayedInjected());
     }
 
-    public function providerForGetTypeFromDocBlock()
+    /**
+     * @return array<string, array<int, string|string>>
+     */
+    public function providerForGetTypeFromDocBlock(): array
     {
         return
             [

@@ -119,42 +119,53 @@ class ReflectionFixture extends AbstractReflectionFixture
     /** @var int|false */
     protected $anIntOrFalse;
 
+    /** @var mixed */
     public $public;
+
+    /** @var mixed */
     protected $protected;
+
+    /** @var mixed */
     private $private;
+
+    /** @var mixed */
     public static $publicStatic;
+
+    /** @var mixed */
     protected static $protectedStatic;
+
+    /** @var mixed */
     private static $privateStatic;
 
-    public function exportable()
+    public function exportable(): void
     {
     }
 
     /**
      * @no-export
      */
-    public function notExportable()
+    public function notExportable(): void
     {
     }
 
-    public function fnAbstractPublic()
+    public function fnAbstractPublic(): void
     {
     }
 
-    protected function fnAbstractProtected()
+    protected function fnAbstractProtected(): void
     {
     }
 
-    public static function fnAbstractStaticPublic()
+    public static function fnAbstractStaticPublic(): void
     {
     }
 
-    protected static function fnAbstractStaticProtected()
+    protected static function fnAbstractStaticProtected(): void
     {
     }
 
     /**
-     * @return string returns a string
+     * @return string Returns a string
      */
     public function aString(): string
     {
@@ -162,15 +173,15 @@ class ReflectionFixture extends AbstractReflectionFixture
     }
 
     /**
-     * @return string|null
+     * @return string|null Returns a nullable string
      */
-    public function aNullableString()
+    public function aNullableString(): ?string
     {
         return '';
     }
 
     /**
-     * @return int returns an int
+     * @return int Returns an int
      */
     public function anInt(): int
     {
@@ -178,9 +189,9 @@ class ReflectionFixture extends AbstractReflectionFixture
     }
 
     /**
-     * @return int|null
+     * @return int|null Returns a nullable int
      */
-    public function aNullableInt()
+    public function aNullableInt(): ?int
     {
         return 0;
     }
