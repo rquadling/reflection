@@ -45,7 +45,7 @@ trait GetMethodsTrait
      *
      * @uses \ReflectionMethod
      */
-    public function getMethods($filter = -1)
+    public function getMethods($filter = -1): array
     {
         return \array_map(
             function (\ReflectionMethod $method) {
